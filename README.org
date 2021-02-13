@@ -1,0 +1,2 @@
+* Introduction
+The purpose of this minor mode is to add utilities and shortcuts to org-mode to facilitate my daily work flow. I am sure there are things that I am doing that could be done another way, but I am also learning more about emacs, elisp, and lisp while working on this. It is great fun!
