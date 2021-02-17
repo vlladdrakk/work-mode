@@ -6,7 +6,7 @@
 
 (run-with-timer 30 30 (lambda ()
                         (if (buffer-modified-p notes/buffer)
-                            notes/save-db)))
+                            (notes/save-db))))
 
 ;; Notes project
 (defun notes/create-db ()
@@ -138,9 +138,11 @@
   (goto-char (or initial-pos 0))
   (let ((next-pos (find-in-org-buffer term)))
     (if next-pos
-        (append
-         '((buffer-substring (beginning-of-line) (end-of-line)))
-         (notes/find-all content term (1+ (end-of-line))))
+        (progn
+          (message next-pos)
+          (append
+          '((buffer-substring (beginning-of-line) (end-of-line)))
+          (notes/find-all content term (1+ (end-of-line)))))
       nil)))
 
 (defun notes/project-list ()
@@ -148,4 +150,4 @@
   (with-current-buffer notes/buffer
     (goto-char 0)
     (let ((content (get-subtree (find-in-org-buffer "^* Projects$" t))))
-      (notes/find-all content "^**.*$"))))
+      (notes/find-all content "^\\*\\*.*$"))))
